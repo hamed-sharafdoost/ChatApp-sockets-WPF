@@ -60,7 +60,7 @@ namespace ChatApp_server
             int count = 0;
             while (active)
             {
-                var newconn = await _socket.AcceptAsync();
+                var newconn = _socket.Accept();
                 if (newconn != null)
                 {
                     count++;

@@ -90,14 +90,9 @@ namespace ChatApp
             if(e.Cancelled)
             {
                 MessageBox.Show("Host closed the connection");
-                this.OnClosed(e);
+                this.Close();
             }
         }
-        protected override void OnClosed(EventArgs e)
-        {
-            _socket.Disconnect(false);
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             if(SendBox.Text != null)
