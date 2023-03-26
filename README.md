@@ -1,3 +1,4 @@
-This is a simple Chat application implemented by WPF
+#Chat-App in WPF
+##It is written with Sockets in .net
+**This small app is using multithreading to handle clients**
 
-I use Sockets in this project
