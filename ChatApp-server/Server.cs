@@ -53,7 +53,7 @@ namespace ChatApp_server
             worker.RunWorkerAsync();
         }
 
-        private async void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
 
             BackgroundWorker worker = sender as BackgroundWorker;
@@ -73,6 +73,8 @@ namespace ChatApp_server
                     newconn.Send(Encoding.UTF8.GetBytes($"Hi Client {count}th!!!"));
                     worker.ReportProgress(count);
                 }
+                else
+                    continue;
             }
 
         }
