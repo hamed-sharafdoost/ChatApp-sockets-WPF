@@ -22,8 +22,6 @@ namespace ChatApp_server
         {
             InitializeComponent();
         }
-
-
         public void StartServer()
         {
             active = true;
@@ -99,11 +97,9 @@ namespace ChatApp_server
         {
             byte[] data = new byte[byte.MaxValue];
             Receive receive1 = receive as Receive;
-            while (true)
-            {
                 if (await receive1.socket.ReceiveAsync(data, SocketFlags.None) > 0)
                     worker.ReportProgress(receive1.count, Encoding.UTF8.GetString(data));
-            }
+
             data = new byte[byte.MaxValue];
         }
 
