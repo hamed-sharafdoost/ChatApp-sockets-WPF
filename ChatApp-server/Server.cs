@@ -58,23 +58,27 @@ namespace ChatApp_server
             int count = 0;
             while (active)
             {
-                var newconn = _socket.Accept();
-                if (newconn != null)
+                try
                 {
-                    count++;
-                    sockets.Add(newconn, count);
-                    Receive receive = new Receive();
-                    receive.socket = newconn;
-                    receive.count = count;
-                    Thread thread = new Thread(new ParameterizedThreadStart(ReceiveAsync));
-                    thread.Start(receive);
-                    newconn.Send(Encoding.UTF8.GetBytes($"Hi Client {count}th!!!"));
-                    worker.ReportProgress(count);
+                    var newconn = _socket.Accept();
+                    if (newconn != null)
+                    {
+                        count++;
+                        sockets.Add(newconn, count);
+                        Receive receive = new Receive();
+                        receive.socket = newconn;
+                        receive.count = count;
+                        Thread thread = new Thread(new ParameterizedThreadStart(ReceiveAsync));
+                        thread.Start(receive);
+                        newconn.Send(Encoding.UTF8.GetBytes($"Hi Client {count}th!!!"));
+                        worker.ReportProgress(count);
+                    }
+                    else
+                        continue;
                 }
-                else
-                    continue;
+                catch (Exception ex)
+                { Console.WriteLine(ex.ToString()); }
             }
-
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -99,7 +103,6 @@ namespace ChatApp_server
             Receive receive1 = receive as Receive;
                 if (await receive1.socket.ReceiveAsync(data, SocketFlags.None) > 0)
                     worker.ReportProgress(receive1.count, Encoding.UTF8.GetString(data));
-
             data = new byte[byte.MaxValue];
         }
 

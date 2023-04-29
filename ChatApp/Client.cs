@@ -22,13 +22,15 @@ namespace ChatApp
 
             Socket socketclient = new Socket(ep.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             socketclient.Connect(ep);
-            
 
+            
             _socket = socketclient;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            this.ClientIp_TextChanged(sender, e);
+            this.ClientPort_TextChanged(sender, e);
             this.StartClient();
             Connect.Enabled = false;
             var endremote = _socket.RemoteEndPoint;
@@ -97,6 +99,16 @@ namespace ChatApp
             {
                 _socket.Send(Encoding.UTF8.GetBytes(SendBox.Text));
             }
+        }
+
+        private void ClientIp_TextChanged(object sender, EventArgs e)
+        {
+            ClientIp.Text = "127.0.0.1";
+        }
+
+        private void ClientPort_TextChanged(object sender, EventArgs e)
+        {
+            ClientPort.Text = "22";
         }
     }
 }

@@ -110,6 +110,7 @@
             this.ClientPort.Name = "ClientPort";
             this.ClientPort.Size = new System.Drawing.Size(158, 27);
             this.ClientPort.TabIndex = 3;
+            this.ClientPort.TextChanged += new System.EventHandler(this.ClientPort_TextChanged);
             // 
             // label2
             // 
@@ -137,6 +138,7 @@
             this.ClientIp.Name = "ClientIp";
             this.ClientIp.Size = new System.Drawing.Size(158, 27);
             this.ClientIp.TabIndex = 0;
+            this.ClientIp.TextChanged += new System.EventHandler(this.ClientIp_TextChanged);
             // 
             // groupBox2
             // 
